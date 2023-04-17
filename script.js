@@ -10,7 +10,7 @@ const finalMessageRevealWord = document.getElementById(
 
 const figureParts = document.querySelectorAll(".figure-part");
 
-const words = ["no apps", "anything", "here", "is modified"];
+const words = ["hello", "zaki", "kh", "is modified"];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
