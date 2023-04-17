@@ -10,7 +10,7 @@ const finalMessageRevealWord = document.getElementById(
 
 const figureParts = document.querySelectorAll(".figure-part");
 
-const words = ["application", "programming", "interface", "wizard"];
+const words = ["application", "programming", "interface", "wizards"];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
