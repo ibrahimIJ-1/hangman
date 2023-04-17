@@ -7,13 +7,32 @@ const finalMessage = document.getElementById("final-message");
 const finalMessageRevealWord = document.getElementById(
   "final-message-reveal-word"
 );
-
 const figureParts = document.querySelectorAll(".figure-part");
+const displayHint = document.getElementById("hint");
+const wordsObj = {};
 
-const words = ["hello", "zaki", "kh", "is modified"];
+fetch("../files/JSON.JSON")
+  .then((response) => response.json())
+  .then((data) => {
+    // Convert the retrieved JSON data to a JavaScript object and assign it to wordsObj
+    Object.assign(wordsObj, data);
+    console.log(wordsObj);
+    // You can work with the wordsObj object here
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
-let selectedWord = words[Math.floor(Math.random() * words.length)];
-
+const words = [];
+const hint = [];
+for (let x in wordsObj) {
+  words.push(wordsObj[x].word);
+  hint.push(wordsObj[x].hint);
+}
+let randomNumber = Math.floor(Math.random() * words.length);
+let selectedWord = words[randomNumber];
+let selectedhint = hint[randomNumber];
+displayHint.innerHTML = selectedhint;
 let playable = true;
 
 const correctLetters = [];
@@ -118,8 +137,10 @@ playAgainBtn.addEventListener("click", () => {
   correctLetters.splice(0);
   wrongLetters.splice(0);
 
-  selectedWord = words[Math.floor(Math.random() * words.length)];
-
+  randomNumber = Math.floor(Math.random() * words.length);
+  selectedWord = words[randomNumber];
+  selectedhint = hint[randomNumber];
+  displayHint.innerHTML = selectedhint;
   displayWord();
 
   updateWrongLettersEl();
