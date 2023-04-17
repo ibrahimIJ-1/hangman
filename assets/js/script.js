@@ -9,19 +9,15 @@ const finalMessageRevealWord = document.getElementById(
 );
 const figureParts = document.querySelectorAll(".figure-part");
 const displayHint = document.getElementById("hint");
-const wordsObj = {};
-
-fetch("../files/JSON.JSON")
-  .then((response) => response.json())
-  .then((data) => {
-    // Convert the retrieved JSON data to a JavaScript object and assign it to wordsObj
-    Object.assign(wordsObj, data);
-    console.log(wordsObj);
-    // You can work with the wordsObj object here
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+const wordsObj = {
+  word1: { word: "blue", hint: "it's a color" },
+  word2: { word: "volvo", hint: "it's a car" },
+  word3: { word: "brother", hint: "it's a member of the family" },
+  word4: { word: "computer", hint: "it's an electronic device" },
+  word5: { word: "banana", hint: "kind of fruits" },
+  word6: { word: "elephant", hint: "kind of animals" },
+  word7: { word: "syria", hint: "name of the best country in asia" },
+};
 
 const words = [];
 const hint = [];
