@@ -9,33 +9,41 @@ const finalMessageRevealWord = document.getElementById(
 );
 const figureParts = document.querySelectorAll(".figure-part");
 const displayHint = document.getElementById("hint");
-const wordsObj = {
-  word1: { word: "blue", hint: "it's a color" },
-  word2: { word: "volvo", hint: "it's a car" },
-  word3: { word: "brother", hint: "it's a member of the family" },
-  word4: { word: "computer", hint: "it's an electronic device" },
-  word5: { word: "banana", hint: "kind of fruits" },
-  word6: { word: "elephant", hint: "kind of animals" },
-  word7: { word: "syria", hint: "name of the best country in asia" },
-};
-
 const words = [];
 const hint = [];
-for (let x in wordsObj) {
-  words.push(wordsObj[x].word);
-  hint.push(wordsObj[x].hint);
-}
-let randomNumber = Math.floor(Math.random() * words.length);
-let selectedWord = words[randomNumber];
-let selectedhint = hint[randomNumber];
-displayHint.innerHTML = selectedhint;
-let playable = true;
-
+const wordsObj = {};
 const correctLetters = [];
 const wrongLetters = [];
+let playable = true;
+let selectedWord;
+let selectedhint;
+let randomNumber;
+
+displayWord();
+
+function getJsonFile() {
+  return fetch("./../assets/files/JSON.json")
+    .then((response) => response.json())
+    .then((data) => {
+      Object.assign(wordsObj, data);
+    });
+}
+
+async function createWordsArray() {
+  await getJsonFile();
+  for (let x in wordsObj) {
+    words.push(wordsObj[x].word);
+    hint.push(wordsObj[x].hint);
+  }
+  randomNumber = Math.floor(Math.random() * words.length);
+  selectedWord = words[randomNumber];
+  selectedhint = hint[randomNumber];
+  displayHint.innerHTML = selectedhint;
+}
 
 // Show hidden word
-function displayWord() {
+async function displayWord() {
+  await createWordsArray();
   wordEl.innerHTML = `
     ${selectedWord
       .split("")
@@ -143,5 +151,3 @@ playAgainBtn.addEventListener("click", () => {
 
   popup.style.display = "none";
 });
-
-displayWord();
