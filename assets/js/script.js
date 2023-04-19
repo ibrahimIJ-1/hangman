@@ -21,7 +21,7 @@ let randomNumber;
 
 createWordsArray();
 // getting the json file
-function getJsonFile() {
+async function getJsonFile() {
   return fetch("./../assets/files/JSON.json")
     .then((response) => response.json())
     .then((data) => {
