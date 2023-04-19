@@ -34,7 +34,7 @@ async function createWordsArray() {
   for (let x in wordsObj) {
     words.push(wordsObj[x].word);
     hint.push(wordsObj[x].hint);
-  }
+  } 
   pickWordHint();
   displayWord();
 }
