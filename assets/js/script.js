@@ -21,8 +21,8 @@ let randomNumber;
 
 createWordsArray();
 // getting the json file
-function getJsonFile() {
-  return fetch("./../assets/files/JSON.json")
+function getJsonFile(path) {
+  return fetch(path)
     .then((response) => response.json())
     .then((data) => {
       Object.assign(wordsObj, data);
@@ -30,7 +30,7 @@ function getJsonFile() {
 }
 // filling the json object into two arrays (word and hint)
 async function createWordsArray() {
-  await getJsonFile();
+  await getJsonFile("./../assets/files/data.json");
   for (let x in wordsObj) {
     words.push(wordsObj[x].word);
     hint.push(wordsObj[x].hint);
