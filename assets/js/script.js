@@ -79,7 +79,7 @@ async function getJsonFile(path) {
 }
 // filling the json object into two arrays (word and hint)
 function createWordsArray() {
-  getJsonFile("./../assets/files/data.json").then(() => {
+  getJsonFile("./assets/files/data.json").then(() => {
     for (let x in wordsObj) {
       words.push(wordsObj[x].word);
       hint.push(wordsObj[x].hint);
