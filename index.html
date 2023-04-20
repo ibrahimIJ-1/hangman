@@ -10,6 +10,13 @@
   <body>
     <h1>Hangman</h1>
     <p>Find the hidden word - Enter a letter</p>
+    <h4>Time left: <span id="timer">10</span></h4>
+    <h2>
+      <span id="playerOneName"></span>
+      <span id="playerOneScore"></span>
+    </h2>
+    <h2><span id="playerTwoName"></span> <span id="playerTwoScore"></span></h2>
+    <h3>Player turn: <span id="turn"></span></h3>
     <div class="game-container">
       <svg height="250" width="200" class="figure-container">
         <!-- Rod -->
@@ -51,7 +58,7 @@
     <div class="notification-container" id="notification-container">
       <p>You have already entered this letter</p>
     </div>
-
+    <button id="startBtn">Start</button>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
