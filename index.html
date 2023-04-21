@@ -54,16 +54,16 @@
       </div>
     </div>
     <div id="names-container">
-      <form class="popup">
+      <div class="popup">
         <label for="playerOneInput">Player one name:</label>
-        <input type="text" id="playerOneInput" />
+        <input type="text" id="playerOneInput" required />
         <br />
         <br />
         <label for="playerTwoInput">Player two name:</label>
-        <input type="text" id="playerTwoInput" />
+        <input type="text" id="playerTwoInput" required />
         <br />
-        <button type="button" id="playBtn">Play</button>
-      </form>
+        <button type="button" id="playBtn">Play!</button>
+      </div>
     </div>
 
     <!-- Notification -->
@@ -71,6 +71,6 @@
       <p>You have already entered this letter</p>
     </div>
     <button id="startBtn">Start</button>
-    <script src="./assets/js/script.js"></script>
+    <script type="module" src="./assets/js/script.js"></script>
   </body>
 </html>

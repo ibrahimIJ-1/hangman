@@ -1,3 +1,5 @@
+import Player from "./player.js";
+
 const wordEl = document.getElementById("word");
 const wrongLettersEl = document.getElementById("wrong-letters");
 const playAgainBtn = document.getElementById("play-button");
@@ -24,11 +26,14 @@ const wordsObj = {};
 const correctLetters = [];
 const wrongLetters = [];
 let playable = true;
+let gameStarted = false;
 let selectedWord;
 let selectedhint;
 let randomNumber;
 let playerOneName;
 let playerTwoName;
+var playerOne;
+var playerTwo;
 let playerTurn;
 let playerOneScore = 0;
 let playerTwoScore = 0;
@@ -41,25 +46,12 @@ playBtn.addEventListener("click", startGame);
 function getPlayersNames() {
   namesContainer.style.display = "flex";
 }
+
 function showNameScore() {
-  playerOneName = document.getElementById("playerOneInput").value;
-  playerTwoName = document.getElementById("playerTwoInput").value;
-  if (playerOneName == null || playerOneName == "") {
-    playerOneName = "Player one";
-    playerOneNameEl.innerHTML = `${playerOneName}'s Score:`;
-  } else {
-    playerOneNameEl.innerHTML = `${playerOneName}'s Score:`;
-    playerOneScoreEl.innerHTML = playerOneScore;
-  }
-  if (playerTwoName == null || playerTwoName == "") {
-    playerTwoName = "Player two";
-    playerTwoNameEl.innerHTML = `${playerTwoName}'s Score:`;
-  } else {
-    playerTwoNameEl.innerHTML = `${playerTwoName}'s Score:`;
-    playerTwoScoreEl.innerHTML = playerTwoScore;
-  }
-  playerTurn = playerOneName;
-  turnEl.innerHTML = playerOneName;
+  namesContainer.style.display = "none";
+}
+
+function hideNameScore() {
   namesContainer.style.display = "none";
 }
 
@@ -72,10 +64,23 @@ function changePlayer() {
 }
 // start the game
 function startGame() {
-  showNameScore();
-  createWordsArray();
-  startTimer();
-  startBtn.style.display = "none";
+  playerOneName = document.getElementById("playerOneInput").value;
+  playerTwoName = document.getElementById("playerTwoInput").value;
+
+  playerOne = new Player(playerOneName);
+  playerTwo = new Player(playerTwoName);
+
+  if (!isNullOrEmpty(playerOne.name) && !isNullOrEmpty(playerTwo.name)) {
+    updatePlayerOneNameScoreElement();
+    updatePlayerTwoNameScoreElement();
+    playerTurn = playerOne.name;
+    turnEl.innerHTML = playerOne.name;
+    hideNameScore();
+    createWordsArray();
+    startTimer();
+    startBtn.style.display = "none";
+    gameStarted = true;
+  }
 }
 // getting the json file
 //now you can use this function to read the file by the path
@@ -168,7 +173,7 @@ function showNotification() {
 }
 // Keydown letter press
 window.addEventListener("keydown", (e) => {
-  if (playable) {
+  if (playable && gameStarted) {
     if (e.keyCode >= 65 && e.keyCode <= 90) {
       const letter = e.key.toLowerCase();
       if (selectedWord.includes(letter)) {
@@ -225,4 +230,16 @@ function startTimer() {
 }
 function stopTimer() {
   clearInterval(timerId);
+}
+
+function isNullOrEmpty(str) {
+  return !str || str.trim().length === 0;
+}
+
+function updatePlayerOneNameScoreElement() {
+  playerOneNameEl.innerHTML = `${playerOne.name}'s Score:${playerOne.score}`;
+}
+
+function updatePlayerTwoNameScoreElement() {
+  playerTwoNameEl.innerHTML = `${playerTwo.name}'s Score:${playerTwo.score}`;
 }
