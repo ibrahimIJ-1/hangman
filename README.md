@@ -18,3 +18,13 @@ Select a letter to figure out a hidden word in a set amount of chances
 -make the application to start the game after comletely finish reading the json file
 
 - json file should be in assets/files
+
+
+## Task 3--> write to file
+
+[Data Time] (Word) (player1 name)-vs-(player2 name) : (winner player name) wins
+
+
+- write that line to outside text file
+- handle if the file or directory doesent exists
+- the file will be like history for all the games
